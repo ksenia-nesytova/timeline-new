@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Event } from '../shared/models/event.interface';
+import { EventComponent } from '../event/event.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
