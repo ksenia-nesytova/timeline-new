@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+// import {
+//   Auth,
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword
+// } from "@angular/fire/auth";
+
+// import { LineComponent } from './line/line.component'
 
 @Component({
   selector: 'app-root',
