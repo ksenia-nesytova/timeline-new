@@ -19,6 +19,7 @@ import { LineComponent } from './line/line.component';
 // import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 // import { doc, getDoc, collection } from "firebase/firestore";
 import { SharedModule } from './shared/shared.module';
+import { EventComponent } from './event/event.component';
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,6 +29,7 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     LineComponent,
+    EventComponent,
 
   ],
   imports: [
