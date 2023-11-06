@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
+
 // import {
 //   Auth,
 //   createUserWithEmailAndPassword,
@@ -12,6 +14,15 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   title = 'timeline';
+  message: any;
+  constructor(private apiService: ApiService) { };
+  ngOnInit() {
+      this.apiService.getMessage().subscribe(data => {
+          this.message = data;
+          console.log(data);
+      });
+  }
 }
