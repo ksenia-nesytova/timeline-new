@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const sql = require('./db');
 
 // handling CORS
 app.use((req, res, next) => {
