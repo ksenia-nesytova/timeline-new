@@ -1,0 +1,5 @@
+<div class="">
+  <div cdkDropList class="container" (cdkDropListDropped)="drop($event)">
+    <app-line *ngFor="let line of lines" [line]="line" cdkDrag></app-line>
+  </div>
+</div>
