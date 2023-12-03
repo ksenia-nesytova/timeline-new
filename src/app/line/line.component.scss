@@ -6,3 +6,7 @@
   // min-height: 300px;
   background-color: limegreen;
 }
+
+.container:not(:last-child) {
+  margin-bottom: .5em;
+}
