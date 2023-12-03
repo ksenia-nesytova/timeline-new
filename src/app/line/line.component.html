@@ -1,8 +1,6 @@
-<div cdkDropList class="container" (cdkDropListDropped)="drop($event)">
-  <!-- <div *ngFor="let event of events" cdkDrag class="item">
-    <span>{{event['year']}}</span>
-    <span>{{event['title']}}</span>
-  </div> -->
-  {{line.title}}
-  <app-event *ngFor="let event of events" [event]="event"></app-event>
+<div class="">
+  <span>{{line.title}}</span>
+  <div cdkDropList class="container" (cdkDropListDropped)="drop($event)">
+    <app-event *ngFor="let event of events" [event]="event"></app-event>
+  </div>
 </div>
