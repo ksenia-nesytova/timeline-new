@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Event } from '../shared/models/event.interface';
 import { EventComponent } from '../event/event.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -10,22 +10,15 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 
 export class LineComponent {
+ @Input() line: any;
 
-  events: Event[] = [
-    {
-      title: "Revolution",
-      year: 1917,
-    },
-    {
-      title: "Plague",
-      year: 2056,
-    },
-    {
-      title: "Alien Invasion",
-      year: 1987,
-    },
-  ];
+  events: Event[] = [];
 
+  ngOnChanges() {
+    if (this.line && this.line.events) {
+      this.events = [...this.line.events];
+    }
+  }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.events, event.previousIndex, event.currentIndex);
     console.log(event);
