@@ -1,0 +1,28 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./database
+    environment:
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5432:5432"
+
+  node-app:
+    build:
+      context: ./server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      - DB_HOST=database
+
+  angular-app:
+    build:
+      context: .
+    ports:
+      - "4200:4200"
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data
+
