@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const sql = require('./db');
+//const sql = require('./db');
 
 // handling CORS
 app.use((req, res, next) => {
@@ -16,6 +16,11 @@ app.get('/api/message', (req, res) => {
 	res.json({ message:
 			'Express server works?' });
 });
+
+app.get('/', async (req, res) => {
+	console.log('QWERTYUIO');
+	res.send('Im alive')
+ });
 
 app.listen(3000, () => {
 	console.log('Server listening on port 3000');

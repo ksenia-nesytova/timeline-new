@@ -1,8 +1,9 @@
 FROM node:14
 
-RUN echo "I'm NODE"
+WORKDIR /app
 
-WORKDIR /app/server
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
 RUN npm install
 
