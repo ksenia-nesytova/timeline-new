@@ -7,6 +7,8 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - "5432:5432"
+    networks:
+      - timeline-network
 
   node-app:
     build:
@@ -17,7 +19,8 @@ services:
       - database
     environment:
       - DB_HOST=database
-
+    networks:
+      - timeline-network
   angular-app:
     build:
       context: .
@@ -26,3 +29,6 @@ services:
     # volumes:
     #   - pgdata:/var/lib/postgresql/data
 
+networks:
+  timeline-network:
+    driver: bridge
