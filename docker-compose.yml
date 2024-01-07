@@ -1,27 +1,42 @@
 version: '3'
 services:
-  database:
-    build:
-      context: ./database
-    environment:
-      - POSTGRES_PASSWORD=admin
+  postgres:
+    container_name: timeline-pg
+    image: postgres
+    hostname: localhost
     ports:
       - "5432:5432"
     networks:
       - timeline-network
 
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: timelinedb
+  # pgadmin:
+  #   container_name: timeline-pgadmin
+  #   image: dpage/pgadmin4
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - "5050:80"
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
   node-app:
+    container_name: timeline-express
     build:
       context: ./server
     ports:
       - "3000:3000"
     depends_on:
-      - database
+      - postgres
     environment:
       - DB_HOST=database
     networks:
       - timeline-network
   angular-app:
+    container_name: timeline-angular
     build:
       context: .
     ports:
