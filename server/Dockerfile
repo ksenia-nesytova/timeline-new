@@ -6,9 +6,10 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install
-RUN npm install axios --save
+RUN npm install pg --save
 
 RUN npm install express --save
+RUN npm install axios --save
 
 COPY . .
 
