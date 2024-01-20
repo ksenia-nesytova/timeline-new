@@ -1,7 +1,16 @@
 const express = require('express');
 const axios = require('axios');
+const { Pool } = require('pg');
+
 const app = express();
-//const sql = require('./db');
+
+const pool = new Pool({
+  host: 'postgres',
+  port: 5432,
+  database: 'timeline_db',
+  user: 'admin',
+  password: 'admin',
+});
 
 // handling CORS
 app.use((req, res, next) => {
@@ -12,16 +21,18 @@ app.use((req, res, next) => {
 	next();
 });
 
-// route for handling requests from the Angular client
-app.get('/api/message', (req, res) => {
-	res.json({ message:
-			'Express server works?' });
-});
-
-app.get('/', async (req, res) => {
-	console.log('QWERTYUIO');
-	res.send('Im alive')
+ app.get('/', async (req, res) => {
+   console.log('DB ALIVE');
+   try {
+     const result = await pool.query('SELECT * FROM entities');
+     res.json(result.rows);
+   } catch (error) {
+     console.error('Error executing query', error);
+     res.status(500).send('Internal Server Error');
+   }
  });
+
+
 
 app.listen(3000, () => {
 	console.log('Server listening on port 3000');
