@@ -17,12 +17,19 @@ import { ApiService } from './api.service';
 
 export class AppComponent implements OnInit {
   title = 'timeline';
-  message: any;
-  constructor(private apiService: ApiService) { };
+  entities: any;
+
+  constructor(private _apiService: ApiService) { };
+
   ngOnInit() {
-      this.apiService.getMessage().subscribe(data => {
-          this.message = data;
-          console.log(data);
-      });
+    this._apiService.getData().subscribe(
+      (data: any) => {
+        this.entities = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.error('Error fetching data', error);
+      }
+    );
   }
 }
