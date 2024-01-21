@@ -200,3 +200,22 @@ CREATE TABLE public.item_owner (
 	CONSTRAINT item_owner_items_fk FOREIGN KEY (item_id) REFERENCES public.items(id),
 	CONSTRAINT item_owner_locations_fk FOREIGN KEY (actor_id) REFERENCES public.locations(id)
 );
+
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(0, 'Столетняя война', '', 24, 5, 1337, 19, 10, 1453, NULL, NULL, NULL, NULL);
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(1, 'Эдвардианская война', '', NULL, NULL, 1337, NULL, NULL, 1360, NULL, NULL, NULL, NULL);
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(2, 'Эдуард III', '', 13, 10, 1312, 21, 6, 1377, NULL, NULL, NULL, NULL);
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(3, 'Черная смерть', '', NULL, NULL, 1346, NULL, NULL, 1353, NULL, NULL, NULL, NULL);
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(5, 'Битва при Креси', NULL, 26, 8, 1346, 26, 8, 1346, NULL, NULL, NULL, NULL);
+INSERT INTO public.entities
+(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES(4, 'Осада Кале', NULL, 4, 9, 1346, 3, 8, 1347, NULL, NULL, NULL, NULL);
