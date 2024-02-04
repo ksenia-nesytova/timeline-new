@@ -54,6 +54,13 @@ app.get('/actors', async (req, res) => {
 });
 
 
+
+app.post('/create-entry', (req, res) => {
+  console.log('DB ALIVE');
+  pool.query('SELECT * FROM entities');
+  res.json(result.rows);
+});
+
 app.listen(3000, () => {
 	console.log('Server listening on port 3000');
 });

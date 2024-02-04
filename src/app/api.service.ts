@@ -12,4 +12,10 @@ export class ApiService {
 		return this.http.get(
 			'http://localhost:3000/');
 	}
+
+	createEntry(entityType?: string, entryData?: any) {
+		console.log('hi from api service');
+		return this.http.post(
+			'http://localhost:3000/create-entry', null);
+	}
 }
