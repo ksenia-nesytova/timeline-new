@@ -18,4 +18,18 @@ export class ApiService {
 		return this.http.post(
 			'http://localhost:3000/create-entry', null);
 	}
+
+	private _transformDataForApi(entryData: any) {
+		console.log(entryData, 'entryData')
+		console.log('Data transformed!')
+	}
+
+
+	// date precision:
+	// 0 - year
+	// 1 - month
+	// 2 - day
+	// 3 - hour (time?)
+
+
 }
