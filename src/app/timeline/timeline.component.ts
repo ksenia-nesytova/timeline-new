@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LineComponent } from '../line/line.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ApiService } from '../api.service';
+
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -12,19 +12,19 @@ export class TimelineComponent {
     {
       title: "The Revolution Era",
       events: [
-          {
-            title: "Revolution",
-            year: 1917,
-          },
-          {
-            title: "The clergy is radicalized",
-            year: 1919,
-          },
-          {
-            title: "Mummification of the Glorious Leader",
-            year: 1937,
-          },
-        ],
+        {
+          title: "Revolution",
+          year: 1917,
+        },
+        {
+          title: "The clergy is radicalized",
+          year: 1919,
+        },
+        {
+          title: "Mummification of the Glorious Leader",
+          year: 1937,
+        },
+      ],
     },
     {
       title: "The Dark Ages",

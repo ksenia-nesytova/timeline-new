@@ -14,23 +14,23 @@ const pool = new Pool({
 
 // handling CORS
 app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin",
-			"http://localhost:4200");
-	res.header("Access-Control-Allow-Headers",
-			"Origin, X-Requested-With, Content-Type, Accept");
-	next();
+  res.header("Access-Control-Allow-Origin",
+    "http://localhost:4200");
+  res.header("Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
- app.get('/', async (req, res) => {
-   console.log('DB ALIVE');
-   try {
-     const result = await pool.query('SELECT * FROM entities');
-     res.json(result.rows);
-   } catch (error) {
-     console.error('Error executing query', error);
-     res.status(500).send('Internal Server Error');
-   }
- });
+app.get('/', async (req, res) => {
+  console.log('DB ALIVE');
+  try {
+    const result = await pool.query('SELECT * FROM entities');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.get('/actors', async (req, res) => {
   try {
@@ -62,5 +62,5 @@ app.post('/create-entry', (req, res) => {
 });
 
 app.listen(3000, () => {
-	console.log('Server listening on port 3000');
+  console.log('Server listening on port 3000');
 });

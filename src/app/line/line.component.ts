@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Event } from '../shared/models/event.interface';
-import { EventComponent } from '../event/event.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -10,7 +9,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 
 export class LineComponent {
- @Input() line: any;
+  @Input() line: any;
 
   events: Event[] = [];
 
