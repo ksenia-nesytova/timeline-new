@@ -8,19 +8,19 @@ import { ApiService } from '../api.service';
 })
 
 export class FilterPanelComponent {
-  impreciseDate: boolean = false;
-
-  newEntry: { title: string, start: string, type: string } = { title: '', start: '0001-01-01T00:00', type: '' };
+  public impreciseDate: boolean = false;
+  public newEntryData: { name: string, start: string, type: string } = { name: '', start: '0001-01-01T00:00', type: '' };
+  private _entityType: string = this.newEntryData.type;
 
   constructor(private _apiService: ApiService) { };
 
   createEntry() {
-    this._apiService.createEntry();
-    console.log('Entry created!', this.newEntry)
+    this._apiService.createEntry(this._entityType, this.newEntryData);
+    console.log('Entry created!', this.newEntryData)
   }
 
   getLablesForStartDate(): string {
-    switch (this.newEntry.type) {
+    switch (this.newEntryData.type) {
       case 'actor':
         return 'Birth Date';
       case 'event':

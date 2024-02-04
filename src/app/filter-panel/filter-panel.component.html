@@ -13,23 +13,23 @@
     <button>Apply Filters</button>
 </div>
 <form #entryForm="ngForm">
-    <div ngModelGroup="newEntry">
+    <div ngModelGroup="newEntryData">
         <h3>Add new entry</h3>
         <label for="entity-type">
             I want to create a new:
         </label>
-        <select id="entity-type" name="entity-type" [(ngModel)]="newEntry.type">
+        <select id="entity-type" name="entity-type" [(ngModel)]="newEntryData.type">
             <option value="actor">Person</option>
             <option value="event">Event</option>
             <option value="item">Artifact</option>
             <option value="institution">Institution</option>
         </select>
-        <div *ngIf="newEntry.type">
+        <div *ngIf="newEntryData.type">
             <label>
-                Title: <input name="title" [(ngModel)]="newEntry.title">
+                Title: <input name="name" [(ngModel)]="newEntryData.name">
             </label>
             <label>
-                {{getLablesForStartDate()}}: <input name="start" type="datetime-local" [(ngModel)]="newEntry.start">
+                {{getLablesForStartDate()}}: <input name="start" type="datetime-local" [(ngModel)]="newEntryData.start">
             </label>
             <div>
                 <input type="checkbox" name="impreciseDate" [(ngModel)]="impreciseDate"> date is imprecise
