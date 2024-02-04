@@ -62,6 +62,23 @@ export class TimelineComponent {
     },
   ];
 
+  entities: any;
+
+  constructor(private _apiService: ApiService) { };
+
+  ngOnInit() {
+    console.log('TIMELINE');
+    this._apiService.getData().subscribe(
+      (data: any) => {
+        this.entities = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.error('Error fetching data', error);
+      }
+    );
+  }
+
   drop(line: CdkDragDrop<string[]>) {
     moveItemInArray(this.lines, line.previousIndex, line.currentIndex);
     console.log(line);

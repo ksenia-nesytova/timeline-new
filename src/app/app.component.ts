@@ -22,14 +22,14 @@ export class AppComponent implements OnInit {
   constructor(private _apiService: ApiService) { };
 
   ngOnInit() {
-    this._apiService.getData().subscribe(
-      (data: any) => {
-        this.entities = data;
-        console.log(data);
-      },
-      (error: any) => {
-        console.error('Error fetching data', error);
-      }
-    );
+    // this._apiService.getData().subscribe(
+    //   (data: any) => {
+    //     this.entities = data;
+    //     console.log(data);
+    //   },
+    //   (error: any) => {
+    //     console.error('Error fetching data', error);
+    //   }
+    // );
   }
 }
