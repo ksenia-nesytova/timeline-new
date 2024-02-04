@@ -20,9 +20,15 @@ export class FilterPanelComponent {
   constructor(private _apiService: ApiService) { };
 
   createEntry() {
-    this._apiService.createEntry(this._entityType, this.newEntryData);
-    console.log('Entry created!', this.newEntryData)
+    console.log(this._getDatePrecision())
+    this._apiService.createEntry(this._entityType, this.newEntryData).subscribe({
+      next: (v) => console.log(v),
+      error: (e) => console.error('Error creating entry', e),
+      complete: () => console.log('complete')
+    });
+    // console.log('Entry created!', this.newEntryData)
   }
+
 
   getLablesForStartDate(): string {
     switch (this.newEntryData.type) {
