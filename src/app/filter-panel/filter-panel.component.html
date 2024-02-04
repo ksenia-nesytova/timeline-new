@@ -29,7 +29,8 @@
                 Title: <input name="name" [(ngModel)]="newEntryData.name">
             </label>
             <label>
-                {{getLablesForStartDate()}}: <input name="start" type="datetime-local" [(ngModel)]="newEntryData.start">
+                {{getLablesForStartDate()}}: <input name="start" type="datetime-local"
+                    [(ngModel)]="newEntryData.start_date">
             </label>
             <div>
                 <input type="checkbox" name="impreciseDate" [(ngModel)]="impreciseDate"> date is imprecise
