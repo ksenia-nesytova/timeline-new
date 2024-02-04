@@ -2,7 +2,7 @@
 
 sudo docker-compose up --remove-orphans --build
 
-## How to manually copy db initialization script into dcoker db container
+## How to manually copy db initialization script into docker db container
 
 sudo docker cp database/init.sql timeline-pg:/docker-entrypoint-initdb.d
 
