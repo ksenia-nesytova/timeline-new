@@ -44,5 +44,32 @@ export class FilterPanelComponent {
         return 'Start Date';
     }
   }
+
+  private _getDatePrecision(): any {
+    if (this.isYearImprecise && this.isMonthImprecise && this.isDayImprecise) {
+      console.log('All components of the date are imprecise!');
+      return -1;
+    }
+    if (this.isDayImprecise && this.isMonthImprecise && !this.isYearImprecise) {
+      console.log('Only know the year!')
+      return 0
+    }
+    if (this.isDayImprecise && !this.isMonthImprecise && !this.isYearImprecise) {
+      console.log('Only know the month and the year!')
+      return 1
+    }
+    if (!this.isDayImprecise && !this.isMonthImprecise && !this.isYearImprecise) {
+      console.log('Know the day and the month and the year!')
+      return 2
+    }
+  }
+
+  // date precision:
+  // 0 - year
+  // 1 - month
+  // 2 - day
+  // 3 - hour (time?)
+
+
 }
 
