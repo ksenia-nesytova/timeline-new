@@ -1,0 +1,46 @@
+<div>
+    <div class="filter-group">
+        <label>
+            <input type="checkbox" name="filterOption1"> Option 1
+        </label>
+    </div>
+
+    <div class="filter-group">
+        <label>
+            <input type="checkbox" name="filterOption2"> Option 2
+        </label>
+    </div>
+    <button>Apply Filters</button>
+</div>
+<form #entryForm="ngForm">
+    <div ngModelGroup="newEntry">
+        <h3>Add new entry</h3>
+        <label for="entity-type">
+            I want to create a new:
+        </label>
+        <select id="entity-type" name="entity-type" [(ngModel)]="newEntry.type">
+            <option value="actor">Person</option>
+            <option value="event">Event</option>
+            <option value="item">Artifact</option>
+            <option value="institution">Institution</option>
+        </select>
+        <div *ngIf="newEntry.type">
+            <label>
+                Title: <input name="title" [(ngModel)]="newEntry.title">
+            </label>
+            <label>
+                {{getLablesForStartDate()}}: <input name="title" type="datetime-local" [(ngModel)]="newEntry.start">
+            </label>
+            <div>
+                <input type="checkbox" name="impreciseDate" [(ngModel)]="impreciseDate"> date is imprecise
+                <div *ngIf="impreciseDate">
+                    <input type="checkbox"> don't know exact day
+                    <input type="checkbox"> don't know exact month
+                    <input type="checkbox"> don't know exact year
+                </div>
+            </div>
+        </div>
+
+        <button (click)="createEntry()">Create entry</button>
+    </div>
+</form>

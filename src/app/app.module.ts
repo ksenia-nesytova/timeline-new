@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { FormsModule } from '@angular/forms';
+
 // import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 // import { provideAuth,getAuth } from '@angular/fire/auth';
@@ -22,6 +25,7 @@ import { LineComponent } from './line/line.component';
 import { SharedModule } from './shared/shared.module';
 import { EventComponent } from './event/event.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { FilterPanelComponent } from './filter-panel/filter-panel.component';
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -33,6 +37,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     LineComponent,
     EventComponent,
     TimelineComponent,
+    FilterPanelComponent,
 
   ],
   imports: [
@@ -40,6 +45,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     AppRoutingModule,
     HttpClientModule,
     DragDropModule,
+    FormsModule,
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAuth(() => getAuth()),
     // provideFirestore(() => getFirestore()),
