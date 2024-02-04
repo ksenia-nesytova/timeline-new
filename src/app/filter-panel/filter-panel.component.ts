@@ -10,7 +10,7 @@ import { ApiService } from '../api.service';
 export class FilterPanelComponent {
   impreciseDate: boolean = false;
 
-  newEntry: { title: string, start: string, type: string } = { title: '', start: '', type: '' };
+  newEntry: { title: string, start: string, type: string } = { title: '', start: '0001-01-01T00:00', type: '' };
 
   constructor(private _apiService: ApiService) { };
 
