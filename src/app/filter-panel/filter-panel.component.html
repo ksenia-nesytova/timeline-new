@@ -41,6 +41,6 @@
             </div>
         </div>
 
-        <button (click)="createEntry()">Create entry</button>
+        <button [disabled]="!newEntryData.name" (click)="createEntry()">Create entry</button>
     </div>
 </form>
