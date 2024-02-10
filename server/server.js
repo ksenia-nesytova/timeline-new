@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const { Pool } = require('pg');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
   console.log('DB ALIVE');
