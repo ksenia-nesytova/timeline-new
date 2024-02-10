@@ -10,6 +10,7 @@ RUN npm install pg --save
 
 RUN npm install express --save
 RUN npm install axios --save
+RUN npm install body-parser --save
 
 COPY . .
 
