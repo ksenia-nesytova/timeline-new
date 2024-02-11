@@ -25,7 +25,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
-  console.log('DB ALIVE');
   try {
     const result = await pool.query('SELECT * FROM entities');
     res.json(result.rows);
@@ -79,10 +78,8 @@ app.post('/create-entry', async (req, res) => {
 app.get('/check-if-exists', async (req, res) => {
   const { name } = req.query;
   const query = 'SELECT EXISTS (SELECT 1 FROM entities WHERE name = $1) AS "exists";';
-  console.log('check', req.query)
   try {
     const { rows } = await pool.query(query, [name]);
-    console.log(rows[0], 'rows[0] exists')
     res.json(rows[0].exists);
   } catch (error) {
     console.error('Error checking duplicate:', error);
