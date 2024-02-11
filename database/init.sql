@@ -23,12 +23,6 @@ CREATE TABLE public.entities (
 	id serial4 NOT NULL,
 	"name" varchar(255) NULL,
 	description text NULL,
-	start_day int4 NULL,
-	start_month int4 NULL,
-	start_year int4 NULL,
-	end_day int4 NULL,
-	end_month int4 NULL,
-	end_year int4 NULL,
 	start_date timestamp NULL,
 	end_date timestamp NULL,
 	start_date_precision int4 NULL,
@@ -202,23 +196,14 @@ CREATE TABLE public.item_owner (
 );
 
 INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Столетняя война', '', 24, 5, 1337, 19, 10, 1453, NULL, NULL, NULL, NULL);
+("name", description, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Столетняя война', '', NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Эдвардианская война', '', NULL, NULL, 1337, NULL, NULL, 1360, NULL, NULL, NULL, NULL);
+("name", description, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Эдуард III', '', NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Эдуард III', '', 13, 10, 1312, 21, 6, 1377, NULL, NULL, NULL, NULL);
-INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Черная смерть', '', NULL, NULL, 1346, NULL, NULL, 1353, NULL, NULL, NULL, NULL);
-INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Битва при Креси', NULL, 26, 8, 1346, 26, 8, 1346, NULL, NULL, NULL, NULL);
-INSERT INTO public.entities
-("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES('Осада Кале', NULL, 4, 9, 1346, 3, 8, 1347, NULL, NULL, NULL, NULL);
+("name", description, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Черная смерть', '', NULL, NULL, NULL, NULL);
 
 
 INSERT INTO public.actors (entities_id) VALUES
