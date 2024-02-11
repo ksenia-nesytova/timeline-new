@@ -7,8 +7,6 @@ import { ApiService } from './api.service';
 //   signInWithEmailAndPassword
 // } from "@angular/fire/auth";
 
-// import { LineComponent } from './line/line.component'
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,17 +17,7 @@ export class AppComponent implements OnInit {
   title = 'timeline';
   entities: any;
 
-  constructor(private _apiService: ApiService) { };
+  constructor() { };
 
-  ngOnInit() {
-    // this._apiService.getData().subscribe(
-    //   (data: any) => {
-    //     this.entities = data;
-    //     console.log(data);
-    //   },
-    //   (error: any) => {
-    //     console.error('Error fetching data', error);
-    //   }
-    // );
-  }
+  ngOnInit() { }
 }
