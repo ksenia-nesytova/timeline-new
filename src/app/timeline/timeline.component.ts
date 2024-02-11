@@ -67,16 +67,14 @@ export class TimelineComponent {
   constructor(private _apiService: ApiService) { };
 
   ngOnInit() {
-    console.log('TIMELINE');
-    this._apiService.getData().subscribe(
-      (data: any) => {
+    this._apiService.getData().subscribe({
+      next: (data) => {
         this.entities = data;
         console.log(data);
       },
-      (error: any) => {
-        console.error('Error fetching data', error);
-      }
-    );
+      error: (error) =>
+        console.error('Error fetching data', error),
+    });
   }
 
   drop(line: CdkDragDrop<string[]>) {
