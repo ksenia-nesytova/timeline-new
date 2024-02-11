@@ -37,7 +37,8 @@ export class FilterPanelComponent {
       error: (e) => console.error('Error creating entry', e),
       complete: () => console.log('Entry creation complete')
     });
-    // console.log('Entry created!', this.newEntryData)
+
+    this._apiService.entryExists$.subscribe((entryExists: boolean) => this.entryExists = entryExists)
   }
 
 
