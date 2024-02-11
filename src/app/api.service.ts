@@ -36,11 +36,19 @@ export class ApiService {
 
 
 	private _transformDataForApi(entryData: any) {
-		console.log(entryData, 'entryData')
-		console.log('Data transformed!')
+		return this._transformDataForEntitiesTable(entryData)
+		// console.log(entryData, 'entryData')
+		// console.log('Data transformed!')
 	}
 
+	private _transformDataForEntitiesTable(entryData: any) {
+		let entryDataForEntities = entryData;
+		console.log(entryData)
+		delete entryDataForEntities.type;
+		delete entryDataForEntities.date_precision;
 
+		return entryDataForEntities;
+	}
 	// date precision:
 	// 0 - year
 	// 1 - month
