@@ -8,19 +8,30 @@ import { ApiService } from '../api.service';
 })
 
 export class FilterPanelComponent {
-  public isDateImprecise: boolean = false;
-  public isYearImprecise: boolean = false;
-  public isMonthImprecise: boolean = false;
-  public isDayImprecise: boolean = false;
+  public isStartDateImprecise: boolean = false;
+  public isStartDayImprecise: boolean = false;
+  public isStartMonthImprecise: boolean = false;
+  public isStartYearImprecise: boolean = false;
 
+  public isEndDateImprecise: boolean = false;
+  public isEndDayImprecise: boolean = false;
+  public isEndMonthImprecise: boolean = false;
+  public isEndYearImprecise: boolean = false;
 
-  public newEntryData: { name: string, start_date: string, end_date: string, date_precision: number, type: string } = { name: '', start_date: '0001-01-01T00:00', end_date: '', date_precision: 0, type: '' };
+  public entryExists: boolean = false;
+
+  public newEntryData: { name: string, start_date: string, end_date: string, start_date_precision: number, end_date_precision: number, type: string } = { name: '', start_date: '0001-01-01T00:00', end_date: '', start_date_precision: 0, end_date_precision: 0, type: '' };
   private _entityType: string = this.newEntryData.type;
 
   constructor(private _apiService: ApiService) { };
 
   createEntry() {
-    console.log(this._getDatePrecision())
+    this.newEntryData.start_date_precision = this._getDatePrecision(
+      this.isStartYearImprecise,
+      this.isStartMonthImprecise,
+      this.isStartDayImprecise
+    );
+
     this._apiService.createEntry(this.newEntryData).subscribe({
       // next: (v) => console.log(v),
       error: (e) => console.error('Error creating entry', e),
@@ -45,22 +56,22 @@ export class FilterPanelComponent {
     }
   }
 
-  private _getDatePrecision(): any {
-    if (this.isYearImprecise && this.isMonthImprecise && this.isDayImprecise) {
+  private _getDatePrecision(isYearImprecise: boolean, isMonthImprecise: boolean, isDayImprecise: boolean): any {
+    if (isYearImprecise && isMonthImprecise && isDayImprecise) {
       console.log('All components of the date are imprecise!');
       return -1;
     }
-    if (this.isDayImprecise && this.isMonthImprecise && !this.isYearImprecise) {
+    if (isDayImprecise && isMonthImprecise && !isYearImprecise) {
       console.log('Only know the year!')
-      return 0
+      return 0;
     }
-    if (this.isDayImprecise && !this.isMonthImprecise && !this.isYearImprecise) {
+    if (isDayImprecise && !isMonthImprecise && !isYearImprecise) {
       console.log('Only know the month and the year!')
-      return 1
+      return 1;
     }
-    if (!this.isDayImprecise && !this.isMonthImprecise && !this.isYearImprecise) {
+    if (!isDayImprecise && !isMonthImprecise && !isYearImprecise) {
       console.log('Know the day and the month and the year!')
-      return 2
+      return 2;
     }
   }
 
