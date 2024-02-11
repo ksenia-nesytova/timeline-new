@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ApiService {
+	public entryExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 	constructor(private http: HttpClient) { }
 
 	getData(): Observable<any> {
@@ -22,9 +24,11 @@ export class ApiService {
 		).pipe(
 			switchMap((exists: boolean) => {
 				if (exists) {
-					console.log('EXISTS')
+					console.log('EXISTS');
+					this.entryExists$.next(true);
 					throw new Error("Duplicate entry found!");
 				}
+				this.entryExists$.next(false);
 				return this.http.post('http://localhost:3000/create-entry', dataForApi);
 			})
 		);

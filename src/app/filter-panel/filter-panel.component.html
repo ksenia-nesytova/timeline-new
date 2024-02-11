@@ -44,6 +44,11 @@
             </div>
         </div>
 
+
+        <div *ngIf="entryExists">
+            ENTRY EXISTS
+        </div>
+
         <button [disabled]="!newEntryData.name" (click)="createEntry()">Create entry</button>
     </div>
 </form>
