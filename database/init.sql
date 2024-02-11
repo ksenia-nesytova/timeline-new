@@ -5,7 +5,7 @@
 -- DROP TABLE public.actor_types;
 
 CREATE TABLE public.actor_types (
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	type_name text NOT NULL,
 	parent_type int4 NULL,
 	CONSTRAINT actor_types_pk PRIMARY KEY (id),
@@ -44,7 +44,7 @@ CREATE TABLE public.entities (
 -- DROP TABLE public.event_types;
 
 CREATE TABLE public.event_types (
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	type_name text NOT NULL,
 	parent_type int4 NULL,
 	CONSTRAINT event_types_pk PRIMARY KEY (id)
@@ -58,7 +58,7 @@ CREATE TABLE public.event_types (
 -- DROP TABLE public.item_statuses;
 
 CREATE TABLE public.item_statuses (
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	"name" text NOT NULL,
 	CONSTRAINT item_statuses_pk PRIMARY KEY (id)
 );
@@ -82,32 +82,32 @@ CREATE TABLE public.item_types (
 
 -- Drop table
 
--- DROP TABLE public.actors;
+DROP TABLE IF EXISTS public.actors CASCADE;
 
 CREATE TABLE public.actors (
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	entities_id int4 NOT NULL,
-	actor_type int4 NOT NULL,
+	actor_type int4 NULL,
 	CONSTRAINT actors_pk PRIMARY KEY (id),
 	CONSTRAINT actors_actor_types_fk FOREIGN KEY (actor_type) REFERENCES public.actor_types(id),
 	CONSTRAINT actors_entities_fk FOREIGN KEY (entities_id) REFERENCES public.entities(id)
 );
 
 
--- public.insitutions definition
+-- public.institutions definition
 
 -- Drop table
 
--- DROP TABLE public.insitutions;
+-- DROP TABLE public.institutions;
 
-CREATE TABLE public.insitutions (
-	id int4 NOT NULL,
+CREATE TABLE public.institutions (
+	id serial4 NOT NULL,
 	founder int4 NULL,
 	actor_type_id int4 NULL,
 	actor_id int4 NOT NULL,
-	CONSTRAINT insitutions_pk PRIMARY KEY (id),
-	CONSTRAINT insitutions_actor_types_fk FOREIGN KEY (actor_type_id) REFERENCES public.actor_types(id),
-	CONSTRAINT insitutions_actors_fk FOREIGN KEY (actor_id) REFERENCES public.actors(id)
+	CONSTRAINT institutions_pk PRIMARY KEY (id),
+	CONSTRAINT institutions_actor_types_fk FOREIGN KEY (actor_type_id) REFERENCES public.actor_types(id),
+	CONSTRAINT institutions_actors_fk FOREIGN KEY (actor_id) REFERENCES public.actors(id)
 );
 
 
@@ -119,7 +119,7 @@ CREATE TABLE public.insitutions (
 
 CREATE TABLE public.items (
 	status_id int4 NOT NULL,
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	"name" text NOT NULL,
 	item_type_id int4 NOT NULL,
 	entity_id int4 NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE public.items (
 
 CREATE TABLE public.locations (
 	coordinates point NULL,
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	entity_id int4 NOT NULL,
 	CONSTRAINT locations_pk PRIMARY KEY (id),
 	CONSTRAINT locations_entities_fk FOREIGN KEY (entity_id) REFERENCES public.entities(id)
@@ -152,7 +152,7 @@ CREATE TABLE public.locations (
 -- DROP TABLE public.periods;
 
 CREATE TABLE public.periods (
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	entity_id int4 NOT NULL,
 	parent_period int4 NULL,
 	CONSTRAINT periods_pk PRIMARY KEY (id),
@@ -171,7 +171,7 @@ CREATE TABLE public.events (
 	persons int4 NULL,
 	items int4 NULL,
 	locations int4 NULL,
-	id int4 NOT NULL,
+	id serial4 NOT NULL,
 	entity_id int4 NOT NULL,
 	"period" int4 NULL,
 	event_type_id int4 NOT NULL,
@@ -202,20 +202,24 @@ CREATE TABLE public.item_owner (
 );
 
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(0, 'Столетняя война', '', 24, 5, 1337, 19, 10, 1453, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Столетняя война', '', 24, 5, 1337, 19, 10, 1453, NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(1, 'Эдвардианская война', '', NULL, NULL, 1337, NULL, NULL, 1360, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Эдвардианская война', '', NULL, NULL, 1337, NULL, NULL, 1360, NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(2, 'Эдуард III', '', 13, 10, 1312, 21, 6, 1377, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Эдуард III', '', 13, 10, 1312, 21, 6, 1377, NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(3, 'Черная смерть', '', NULL, NULL, 1346, NULL, NULL, 1353, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Черная смерть', '', NULL, NULL, 1346, NULL, NULL, 1353, NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(5, 'Битва при Креси', NULL, 26, 8, 1346, 26, 8, 1346, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Битва при Креси', NULL, 26, 8, 1346, 26, 8, 1346, NULL, NULL, NULL, NULL);
 INSERT INTO public.entities
-(id, "name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
-VALUES(4, 'Осада Кале', NULL, 4, 9, 1346, 3, 8, 1347, NULL, NULL, NULL, NULL);
+("name", description, start_day, start_month, start_year, end_day, end_month, end_year, start_date, end_date, start_date_precision, end_date_precision)
+VALUES('Осада Кале', NULL, 4, 9, 1346, 3, 8, 1347, NULL, NULL, NULL, NULL);
+
+
+INSERT INTO public.actors (entities_id) VALUES
+	 (2);
