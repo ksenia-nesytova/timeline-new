@@ -21,10 +21,10 @@ export class FilterPanelComponent {
 
   createEntry() {
     console.log(this._getDatePrecision())
-    this._apiService.createEntry(this._entityType, this.newEntryData).subscribe({
-      next: (v) => console.log(v),
+    this._apiService.createEntry(this.newEntryData).subscribe({
+      // next: (v) => console.log(v),
       error: (e) => console.error('Error creating entry', e),
-      complete: () => console.log('complete')
+      complete: () => console.log('Entry creation complete')
     });
     // console.log('Entry created!', this.newEntryData)
   }
