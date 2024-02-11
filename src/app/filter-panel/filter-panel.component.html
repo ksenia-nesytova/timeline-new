@@ -33,11 +33,13 @@
                     [(ngModel)]="newEntryData.start_date">
             </label>
             <div>
-                <input type="checkbox" name="impreciseDate" [(ngModel)]="isDateImprecise"> date is imprecise
-                <div *ngIf="isDateImprecise">
-                    <input type="checkbox" name="impreciseDay" [(ngModel)]="isDayImprecise"> don't know exact day
-                    <input type="checkbox" name="impreciseMonth" [(ngModel)]="isMonthImprecise"> don't know exact month
-                    <input type="checkbox" name="impreciseYear" [(ngModel)]="isYearImprecise"> don't know exact year
+                <input type="checkbox" name="impreciseStartDate" [(ngModel)]="isStartDateImprecise"> date is imprecise
+                <div *ngIf="isStartDateImprecise">
+                    <input type="checkbox" name="impreciseDay" [(ngModel)]="isStartDayImprecise"> don't know exact day
+                    <input type="checkbox" name="impreciseMonth" [(ngModel)]="isStartMonthImprecise"> don't know exact
+                    month
+                    <input type="checkbox" name="impreciseYear" [(ngModel)]="isStartYearImprecise"> don't know exact
+                    year
                 </div>
             </div>
         </div>
