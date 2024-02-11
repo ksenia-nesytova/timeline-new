@@ -58,11 +58,23 @@ app.get('/actors', async (req, res) => {
 
 
 
-app.post('/create-entry', (req, res) => {
-  console.log('DB ALIVE');
-  pool.query('SELECT * FROM entities');
-  res.json(result.rows);
+app.post('/create-entry', async (req, res) => {
+  console.log('DB ALIVE req', req.body);
+  const { name } = req.body;
+  const query = `
+    INSERT INTO entities (name)
+    VALUES ($1)
+    RETURNING *;
+  `;
+  try {
+    const { rows } = await pool.query(query, [name]);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error inserting data:', error);
+    res.status(500).send('Error inserting data');
+  }
 });
+
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
