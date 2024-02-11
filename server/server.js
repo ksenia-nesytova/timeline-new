@@ -76,6 +76,20 @@ app.post('/create-entry', async (req, res) => {
 });
 
 
+app.get('/check-if-exists', async (req, res) => {
+  const { name } = req.query;
+  const query = 'SELECT EXISTS (SELECT 1 FROM entities WHERE name = $1) AS "exists";';
+  console.log('check', req.query)
+  try {
+    const { rows } = await pool.query(query, [name]);
+    console.log(rows[0], 'rows[0] exists')
+    res.json(rows[0].exists);
+  } catch (error) {
+    console.error('Error checking duplicate:', error);
+    res.status(500).send('Error checking duplicate');
+  }
+})
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
