@@ -50,7 +50,22 @@ export class FilterPanelComponent {
       case 'item':
         return 'Creation Date';
       case 'institution':
-        return 'Founding Date';
+        return 'Establishment Date';
+      default:
+        return 'Start Date';
+    }
+  }
+
+  getLablesForEndDate(): string {
+    switch (this.newEntryData.type) {
+      case 'actor':
+        return 'Death Date';
+      case 'event':
+        return 'Start Date';
+      case 'item':
+        return 'Destruction Date';
+      case 'institution':
+        return 'Disbandment Date';
       default:
         return 'Start Date';
     }
