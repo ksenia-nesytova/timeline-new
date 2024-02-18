@@ -23,6 +23,8 @@ export class FilterPanelComponent {
   public newEntryData: { name: string, start_date: string, end_date: string, start_date_precision: number, end_date_precision: number, type: string } = { name: '', start_date: '0001-01-01T00:00', end_date: '', start_date_precision: 0, end_date_precision: 0, type: '' };
   private _entityType: string = this.newEntryData.type;
 
+  public existingEntry: Object = {};
+
   constructor(private _apiService: ApiService) { };
 
   public createEntry() {
@@ -38,7 +40,12 @@ export class FilterPanelComponent {
       complete: () => console.log('Entry creation complete')
     });
 
-    this._apiService.entryExists$.subscribe((entryExists: boolean) => this.entryExists = entryExists)
+    this._apiService.entryExists$.subscribe((entryExists: boolean) => {
+      this.entryExists = entryExists;
+      if (this.entryExists) {
+        this._apiService.findEntry(this.newEntryData).subscribe(existingEntry => this.existingEntry = existingEntry)
+      }
+    });
   }
 
 
