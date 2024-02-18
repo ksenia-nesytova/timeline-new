@@ -47,6 +47,7 @@
 
         <div *ngIf="entryExists">
             ENTRY EXISTS
+            {{ existingEntry | json }}
         </div>
 
         <button [disabled]="!newEntryData.name" (click)="createEntry()">Create entry</button>
