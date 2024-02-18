@@ -25,7 +25,7 @@ export class FilterPanelComponent {
 
   constructor(private _apiService: ApiService) { };
 
-  createEntry() {
+  public createEntry() {
     this.newEntryData.start_date_precision = this._getDatePrecision(
       this.isStartYearImprecise,
       this.isStartMonthImprecise,
@@ -42,7 +42,7 @@ export class FilterPanelComponent {
   }
 
 
-  getLablesForStartDate(): string {
+  public getLablesForStartDate(): string {
     switch (this.newEntryData.type) {
       case 'actor':
         return 'Birth Date';
@@ -57,7 +57,7 @@ export class FilterPanelComponent {
     }
   }
 
-  getLablesForEndDate(): string {
+  public getLablesForEndDate(): string {
     switch (this.newEntryData.type) {
       case 'actor':
         return 'Death Date';
