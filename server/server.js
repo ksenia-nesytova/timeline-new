@@ -108,7 +108,7 @@ app.get('/find-entry', async (req, res) => {
 })
 
 app.get('/check-if-exists', async (req, res) => {
-  const { name } = req.query;
+  const { name, start_date, end_date } = req.query;
   const query = 'SELECT EXISTS (SELECT 1 FROM entities WHERE name = $1) AS "exists";';
   try {
     const { rows } = await pool.query(query, [name]);
