@@ -71,6 +71,42 @@ app.post('/create-entry', async (req, res) => {
 });
 
 
+app.get('/find-entry', async (req, res) => {
+  const { name, start_date, end_date } = req.query;
+  let conditions = [];
+  let params = [];
+
+
+  if (name) {
+    conditions.push('name = $1');
+    params.push(name);
+  }
+  // if (start_date) {
+  //   conditions.push('start_date = $' + (params.length + 1));
+  //   params.push(start_date);
+  // }
+  // if (end_date) {
+  //   conditions.push('end_date = $' + (params.length + 1));
+  //   params.push(end_date);
+  // }
+
+  let query = `
+    SELECT * FROM entities`;
+  if (conditions.length > 0) {
+    query += ` WHERE ${conditions.join(' AND ')}`;
+    console.log(query, 'QUERY');
+  }
+
+  try {
+    const result = await pool.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+
+})
+
 app.get('/check-if-exists', async (req, res) => {
   const { name } = req.query;
   const query = 'SELECT EXISTS (SELECT 1 FROM entities WHERE name = $1) AS "exists";';
