@@ -35,6 +35,14 @@ export class ApiService {
 	}
 
 
+	findEntry(entryData?: any) {
+		let dataForApi = this._transformDataForApi(entryData);
+
+		return this.http.get<boolean>(
+			'http://localhost:3000/find-entry', { params: { name: dataForApi.name, start_date: dataForApi.start_date, end_date: dataForApi.end_date } }
+		)
+	}
+
 	private _transformDataForApi(entryData: any) {
 		return this._transformDataForEntitiesTable(entryData)
 		// console.log(entryData, 'entryData')
