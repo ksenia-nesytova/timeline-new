@@ -104,6 +104,19 @@ app.post('/create-entry', async (req, res) => {
 });
 
 
+async function createEntity(pool, name) {
+  const entitiesQuery = `
+    INSERT INTO entities (name)
+    VALUES ($1)
+    RETURNING id;
+  `;
+  const { rows } = await pool.query(entitiesQuery, [name]);
+  console.log('ENTITY created', rows[0].id)
+  return rows[0].id;
+}
+
+
+
 app.get('/find-entry', async (req, res) => {
   const { name, start_date, end_date } = req.query;
   let conditions = [];
