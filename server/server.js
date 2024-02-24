@@ -71,15 +71,32 @@ app.get('/events', async (req, res) => {
 
 app.post('/create-entry', async (req, res) => {
   console.log('DB ALIVE req', req.body);
-  const { name } = req.body;
-  const query = `
-    INSERT INTO entities (name)
-    VALUES ($1)
-    RETURNING *;
-  `;
+  const { name, start_date, end_date, type } = req.body;
+
   try {
-    const { rows } = await pool.query(query, [name]);
-    res.json(rows);
+    // Create an entity and capture its ID
+    const entityId = await createEntity(pool, name);
+
+
+    switch (type) {
+      case 'actor':
+        console.log('im an actor!');
+        await createActorEntry(pool, name);
+        break;
+      case 'event':
+        console.log('im an event!');
+        break;
+      case 'item':
+        console.log('im item');
+        break;
+      case 'institution':
+        console.log('im insitition');
+        break;
+      default:
+        break;
+    }
+
+
   } catch (error) {
     console.error('Error inserting data:', error);
     res.status(500).send('Error inserting data');
