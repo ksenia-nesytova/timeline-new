@@ -37,10 +37,10 @@ app.get('/', async (req, res) => {
 app.get('/actors', async (req, res) => {
   try {
     const actors = await pool.query(`
-      select entities_id, entities.name AS name, entities.description as description, 
-      entities.start_date as start_date, 
-      entities.end_date as end_date from actors
-      left join entities on actors.entities_id = entities.id;
+      SELECT entity_id, entities.name AS name, entities.description AS description, 
+      entities.start_date AS start_date, 
+      entities.end_date as end_date FROM actors
+      LEFT JOIN entities ON actors.entity_id = entities.id;
 
     `);
     console.log(actors, actors.rows)
