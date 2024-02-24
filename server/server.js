@@ -51,6 +51,22 @@ app.get('/actors', async (req, res) => {
   }
 });
 
+app.get('/events', async (req, res) => {
+  try {
+    const events = await pool.query(`
+      SELECT entity_id, entities.name AS name, entities.description AS description, 
+      entities.start_date AS start_date, 
+      entities.end_date AS end_date FROM events
+      LEFT JOIN entities ON events.entity_id = entities.id;
+
+    `);
+    console.log(events, events.rows)
+    res.json(events.rows);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.post('/create-entry', async (req, res) => {
