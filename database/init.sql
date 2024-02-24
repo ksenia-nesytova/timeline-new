@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS public.events (
 	id serial4 NOT NULL,
 	entity_id int4 NOT NULL,
 	"period" int4 NULL,
-	event_type_id int4 NOT NULL,
+	event_type_id int4 NULL,
 	parent_event_id int4 NULL,
 	CONSTRAINT events_pk PRIMARY KEY (id),
 	CONSTRAINT events_actors_fk FOREIGN KEY (persons) REFERENCES public.actors(id),
