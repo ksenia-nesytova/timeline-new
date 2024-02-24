@@ -115,6 +115,18 @@ async function createEntity(pool, name) {
   return rows[0].id;
 }
 
+async function createEventEntry(pool, name) {
+
+  const entityId = await createEntity(pool, name);
+
+  const eventsQuery = `
+    INSERT INTO events (entity_id)
+    VALUES ($1)
+  `;
+
+  await pool.query(eventsQuery, [entityId])
+}
+
 
 
 app.get('/find-entry', async (req, res) => {
