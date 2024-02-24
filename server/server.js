@@ -127,6 +127,38 @@ async function createEventEntry(pool, name) {
   await pool.query(eventsQuery, [entityId])
 }
 
+async function createActorEntry(pool, name) {
+
+  try {
+    //create entity entry for the actor
+    const entityIdForActor = await createEntity(pool, name);
+
+    //create actor entry
+    const actorsQuery = `
+      INSERT INTO actors (entity_id)
+      VALUES ($1);
+    `;
+    await pool.query(actorsQuery, [entityIdForActor]);
+
+    //create entity entry for the actor's birth event
+    const actorBirthEventName = `${name} Birth`;
+    const entityIdForActorBirth = await createEntity(pool, actorBirthEventName);
+
+
+    //create birth event for the actor
+    const actorBirthEventQuery = `
+      INSERT INTO events (entity_id)
+      VALUES ($1)
+      RETURNING *;
+    `;
+    await pool.query(actorBirthEventQuery, [entityIdForActorBirth]);
+  } catch (error) {
+    console.error('Error creating actor entry:', error);
+  }
+
+}
+
+
 
 
 app.get('/find-entry', async (req, res) => {
