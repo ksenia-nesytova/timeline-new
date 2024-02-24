@@ -34,6 +34,9 @@ export class ApiService {
 		);
 	}
 
+	// searchForEntry() {
+
+	// }
 
 	findEntry(entryData?: any) {
 		let dataForApi = this._transformDataForApi(entryData);
@@ -52,7 +55,7 @@ export class ApiService {
 	private _transformDataForEntitiesTable(entryData: any) {
 		let entryDataForEntities = entryData;
 		console.log(entryData)
-		delete entryDataForEntities.type;
+		// delete entryDataForEntities.type;
 		delete entryDataForEntities.date_precision;
 
 		return entryDataForEntities;
