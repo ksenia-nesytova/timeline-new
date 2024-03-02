@@ -169,6 +169,20 @@ async function createActorEntry(pool, name) {
 
 }
 
+// Function to create an item entry
+async function createItemEntry(pool, name) {
+  //create entity entry for the item
+  const entityId = await createEntity(pool, name);
+
+  //create item entry
+  const itemsQuery = `
+    INSERT INTO items (entity_id)
+    VALUES ($1)
+  `;
+
+  await pool.query(itemsQuery, [entityId])
+}
+
 
 
 
