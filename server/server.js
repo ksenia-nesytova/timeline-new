@@ -171,6 +171,7 @@ async function createActorEntry(pool, name) {
 
 // Function to create an item entry
 async function createItemEntry(pool, name) {
+  try {
   //create entity entry for the item
   const entityId = await createEntity(pool, name);
 
@@ -181,6 +182,10 @@ async function createItemEntry(pool, name) {
   `;
 
   await pool.query(itemsQuery, [entityId])
+  } catch (error) {
+    console.error('Error creating item entry:', error);
+
+  }
 }
 
 
