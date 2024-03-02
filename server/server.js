@@ -92,12 +92,15 @@ app.post('/create-entry', async (req, res) => {
         await createActorEntry(pool, name);
         break;
       case 'event':
+        await createEventEntry(pool, name);
         console.log('im an event!');
         break;
       case 'item':
+        await createItemEntry(pool, name);
         console.log('im item');
         break;
       case 'institution':
+        await createInstitutionEntry(pool, name);
         console.log('im insitition');
         break;
       default:
