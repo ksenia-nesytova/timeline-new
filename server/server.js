@@ -189,6 +189,40 @@ async function createItemEntry(pool, name) {
 }
 
 
+// Function to create an institution entry
+async function createInstitutionEntry(pool, name) {
+  try {
+    //create entity entry for the item
+    const entityId = await createEntity(pool, name);
+
+    //create item entry
+    const institutionsQuery = `
+      INSERT INTO institutions (entity_id)
+      VALUES ($1)
+    `;
+
+    await pool.query(institutionsQuery, [entityId]);
+
+
+    //create entity entry for the actor's birth event
+    const institutionBirthEventName = `${name} was founded`;
+    const entityIdForInstitutionBirth = await createEntity(pool, institutionBirthEventName);
+
+
+    //create birth event for the actor
+    const institutionBirthEventQuery = `
+        INSERT INTO events (entity_id)
+        VALUES ($1)
+        RETURNING *;
+      `;
+    await pool.query(institutionBirthEventQuery, [entityIdForInstitutionBirth]);
+  } catch (error) {
+    console.error('Error creating institution entry:', error);
+
+  }
+}
+
+
 
 
 app.get('/find-entry', async (req, res) => {
