@@ -82,8 +82,8 @@ app.post('/create-entry', async (req, res) => {
   const { name, start_date, end_date, type } = req.body;
 
   try {
-    // Create an entity and capture its ID
-    const entityId = await createEntity(pool, name);
+    // // Create an entity and capture its ID
+    // const entityId = await createEntity(pool, name);
 
 
     switch (type) {
