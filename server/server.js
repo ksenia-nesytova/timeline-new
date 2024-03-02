@@ -37,9 +37,13 @@ app.get('/', async (req, res) => {
 app.get('/actors', async (req, res) => {
   try {
     const actors = await pool.query(`
-      SELECT entity_id, entities.name AS name, entities.description AS description, 
+      SELECT
+      entity_id,
+      entities.name AS name,
+      entities.description AS description, 
       entities.start_date AS start_date, 
-      entities.end_date as end_date FROM actors
+      entities.end_date as end_date
+      FROM actors
       LEFT JOIN entities ON actors.entity_id = entities.id;
 
     `);
@@ -54,9 +58,13 @@ app.get('/actors', async (req, res) => {
 app.get('/events', async (req, res) => {
   try {
     const events = await pool.query(`
-      SELECT entity_id, entities.name AS name, entities.description AS description, 
+      SELECT
+      entity_id, 
+      entities.name AS name,
+      entities.description AS description, 
       entities.start_date AS start_date, 
-      entities.end_date AS end_date FROM events
+      entities.end_date AS end_date
+      FROM events
       LEFT JOIN entities ON events.entity_id = entities.id;
 
     `);
