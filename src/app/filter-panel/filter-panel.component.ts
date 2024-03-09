@@ -8,6 +8,9 @@ import { ApiService } from '../api.service';
 })
 
 export class FilterPanelComponent {
+  public isStartDateBCE: boolean = false;
+  public isEndDateBCE: boolean = false;
+
   public isStartDateImprecise: boolean = false;
   public isStartDayImprecise: boolean = false;
   public isStartMonthImprecise: boolean = false;
@@ -33,6 +36,8 @@ export class FilterPanelComponent {
       this.isStartMonthImprecise,
       this.isStartDayImprecise
     );
+
+    this._formatDates();
 
     this._apiService.createEntry(this.newEntryData).subscribe({
       // next: (v) => console.log(v),
@@ -104,6 +109,12 @@ export class FilterPanelComponent {
   // 2 - day
   // 3 - hour (time?)
 
+  private _formatDates() {
+    const startDateFormatted = this.newEntryData.start_date.replace('T', ' ') + ':00.0';
+    const endDateFormatted = this.newEntryData.end_date.replace('T', ' ') + ':00.0';
 
+    this.isStartDateBCE ? this.newEntryData.start_date = startDateFormatted + ' BC' : this.newEntryData.start_date = startDateFormatted;
+    this.isEndDateBCE ? this.newEntryData.end_date = endDateFormatted + ' BC' : this.newEntryData.end_date = endDateFormatted;
+  }
 }
 

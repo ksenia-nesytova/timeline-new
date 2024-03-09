@@ -29,9 +29,10 @@
                 Title: <input name="name" [(ngModel)]="newEntryData.name">
             </label>
             <label>
-                {{getLablesForStartDate()}}: <input name="start" type="datetime-local"
+                {{ getLablesForStartDate() }}: <input name="start" type="datetime-local"
                     [(ngModel)]="newEntryData.start_date">
             </label>
+            <input type="checkbox" name="startDateIsBC" [(ngModel)]="isStartDateBCE"> BCE(BC)
             <div>
                 <input type="checkbox" name="impreciseStartDate" [(ngModel)]="isStartDateImprecise"> date is imprecise
                 <div *ngIf="isStartDateImprecise">
