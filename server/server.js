@@ -89,7 +89,7 @@ app.post('/create-entry', async (req, res) => {
     switch (type) {
       case 'actor':
         console.log('im an actor!');
-        await createActorEntry(pool, name);
+        await createActorEntry(pool, name, start_date);
         break;
       case 'event':
         await createEventEntry(pool, name);
@@ -115,13 +115,13 @@ app.post('/create-entry', async (req, res) => {
 });
 
 
-async function createEntity(pool, name) {
+async function createEntity(pool, name, start_date) {
   const entitiesQuery = `
-    INSERT INTO entities (name)
-    VALUES ($1)
+    INSERT INTO entities (name, start_date)
+    VALUES ($1, $2)
     RETURNING id;
   `;
-  const { rows } = await pool.query(entitiesQuery, [name]);
+  const { rows } = await pool.query(entitiesQuery, [name, start_date || null]);
   console.log('ENTITY created', rows[0].id)
   return rows[0].id;
 }
@@ -138,11 +138,11 @@ async function createEventEntry(pool, name) {
   await pool.query(eventsQuery, [entityId])
 }
 
-async function createActorEntry(pool, name) {
+async function createActorEntry(pool, name, start_date) {
 
   try {
     //create entity entry for the actor
-    const entityIdForActor = await createEntity(pool, name);
+    const entityIdForActor = await createEntity(pool, name, start_date);
 
     //create actor entry
     const actorsQuery = `
