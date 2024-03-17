@@ -128,8 +128,10 @@ async function createEntity(pool, name, start_date) {
 
 async function createEventEntry(pool, name) {
 
+  //create entity entry for the event
   const entityId = await createEntity(pool, name);
 
+  //create event entry
   const eventsQuery = `
     INSERT INTO events (entity_id)
     VALUES ($1)
