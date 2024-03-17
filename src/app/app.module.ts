@@ -32,35 +32,32 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LineComponent,
-    EventComponent,
-    TimelineComponent,
-    FilterPanelComponent,
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    DragDropModule,
-    FormsModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAuth(() => getAuth()),
-    // provideFirestore(() => getFirestore()),
-    // provideAnalytics(() => getAnalytics()),
-    // provideDatabase(() => getDatabase()),
-    // provideFunctions(() => getFunctions()),
-    // providePerformance(() => getPerformance()),
-    // provideRemoteConfig(() => getRemoteConfig()),
-    // provideStorage(() => getStorage()),
-    SharedModule
-  ],
-  providers: [
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        DragDropModule,
+        FormsModule,
+        // provideFirebaseApp(() => initializeApp(environment.firebase)),
+        // provideAuth(() => getAuth()),
+        // provideFirestore(() => getFirestore()),
+        // provideAnalytics(() => getAnalytics()),
+        // provideDatabase(() => getDatabase()),
+        // provideFunctions(() => getFunctions()),
+        // providePerformance(() => getPerformance()),
+        // provideRemoteConfig(() => getRemoteConfig()),
+        // provideStorage(() => getStorage()),
+        SharedModule,
+        LineComponent,
+        EventComponent,
+        TimelineComponent,
+        FilterPanelComponent
+    ],
+    providers: [
     // ScreenTrackingService,UserTrackingService
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
 
