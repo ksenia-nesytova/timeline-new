@@ -1,4 +1,4 @@
 export interface Event {
-  title: string;
-  year: number;
+  name: string;
+  start_date: string;
 }
