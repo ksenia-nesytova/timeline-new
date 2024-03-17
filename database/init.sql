@@ -97,11 +97,12 @@ CREATE TABLE IF NOT EXISTS public.actors (
 CREATE TABLE IF NOT EXISTS public.institutions (
 	id serial4 NOT NULL,
 	founder int4 NULL,
-	actor_type_id int4 NULL,
-	actor_id int4 NOT NULL,
+	-- institution_type_id int4 NULL,
+	entity_id int4 NOT NULL,
 	CONSTRAINT institutions_pk PRIMARY KEY (id),
-	CONSTRAINT institutions_actor_types_fk FOREIGN KEY (actor_type_id) REFERENCES public.actor_types(id),
-	CONSTRAINT institutions_actors_fk FOREIGN KEY (actor_id) REFERENCES public.actors(id)
+	CONSTRAINT institutions_entities_fk FOREIGN KEY (entity_id) REFERENCES public.entities(id),
+	-- CONSTRAINT institutions_actor_types_fk FOREIGN KEY (actor_type_id) REFERENCES public.actor_types(id),
+	-- CONSTRAINT institutions_actors_fk FOREIGN KEY (actor_id) REFERENCES public.actors(id)
 );
 
 
