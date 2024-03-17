@@ -8,8 +8,8 @@ describe('FilterPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterPanelComponent ]
-    })
+    imports: [FilterPanelComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(FilterPanelComponent);

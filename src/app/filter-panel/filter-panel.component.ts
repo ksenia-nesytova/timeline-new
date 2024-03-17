@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
+import { NgIf, JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-filter-panel',
-  templateUrl: './filter-panel.component.html',
-  styleUrls: ['./filter-panel.component.scss']
+    selector: 'app-filter-panel',
+    templateUrl: './filter-panel.component.html',
+    styleUrls: ['./filter-panel.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf, JsonPipe]
 })
 
 export class FilterPanelComponent {

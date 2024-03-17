@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 import { ApiService } from '../api.service';
+import { LineComponent } from '../line/line.component';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  styleUrls: ['./timeline.component.scss'],
+  standalone: true,
+  imports: [CdkDropList, NgFor, LineComponent, CdkDrag]
 })
 export class TimelineComponent {
   lines = [
