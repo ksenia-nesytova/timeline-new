@@ -88,7 +88,7 @@ export class FilterPanelComponent {
     }
   }
 
-  private _getDatePrecision(isYearImprecise: boolean, isMonthImprecise: boolean, isDayImprecise: boolean): any {
+  private _getDatePrecision(isYearImprecise: boolean, isMonthImprecise: boolean, isDayImprecise: boolean): number {
     if (isYearImprecise && isMonthImprecise && isDayImprecise) {
       console.log('All components of the date are imprecise!');
       return -1;
@@ -104,6 +104,9 @@ export class FilterPanelComponent {
     if (!isDayImprecise && !isMonthImprecise && !isYearImprecise) {
       console.log('Know the day and the month and the year!')
       return 2;
+    }
+    else {
+      return -1;
     }
   }
 
