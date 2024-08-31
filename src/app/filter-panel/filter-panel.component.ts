@@ -2,16 +2,26 @@ import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
 import { NgIf, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ModalWindowComponent } from '../modal-window/modal-window.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @Component({
-    selector: 'app-filter-panel',
-    templateUrl: './filter-panel.component.html',
-    styleUrls: ['./filter-panel.component.scss'],
-    standalone: true,
-    imports: [FormsModule, NgIf, JsonPipe]
+  selector: 'app-filter-panel',
+  templateUrl: './filter-panel.component.html',
+  styleUrls: ['./filter-panel.component.scss'],
+  standalone: true,
+  imports: [FormsModule, NgIf, JsonPipe, BrowserAnimationsModule]
 })
 
 export class FilterPanelComponent {
+
+  constructor(
+    private _apiService: ApiService,
+    public dialog: MatDialog
+  ) { };
+
+  public openAddNewEntryPanel: boolean = false;
+
   public isStartDateBCE: boolean = false;
   public isEndDateBCE: boolean = false;
 
@@ -32,9 +42,11 @@ export class FilterPanelComponent {
 
   public existingEntry: Object = {};
 
-  constructor(private _apiService: ApiService) { };
+
 
   public createEntry() {
+
+    //rewrite like checkIfDateIsBCE
     this.newEntryData.start_date_precision = this._getDatePrecision(
       this.isStartYearImprecise,
       this.isStartMonthImprecise,
@@ -123,5 +135,15 @@ export class FilterPanelComponent {
     this.isStartDateBCE ? this.newEntryData.start_date = startDateFormatted + ' BC' : this.newEntryData.start_date = startDateFormatted;
     this.isEndDateBCE ? this.newEntryData.end_date = endDateFormatted + ' BC' : this.newEntryData.end_date = endDateFormatted;
   }
+
+  public openModal() {
+    const dialogRef = this.dialog.open(ModalWindowComponent, {
+      width: '250px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }
 

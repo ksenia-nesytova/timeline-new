@@ -1,0 +1,13 @@
+.filter-panel {
+    display: flex;
+    flex-direction: column;
+    background: red;
+    border: 2px black solid;
+
+    max-width: 600px;
+}
+
+.filter-column {
+    display: flex;
+    background-color: aquamarine;
+}

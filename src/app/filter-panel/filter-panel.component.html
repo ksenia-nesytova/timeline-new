@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div class="filter-group">
         <label>
             <input type="checkbox" name="filterOption1"> Option 1
@@ -11,46 +11,70 @@
         </label>
     </div>
     <button>Apply Filters</button>
-</div>
-<form #entryForm="ngForm">
-    <div ngModelGroup="newEntryData">
-        <h3>Add new entry</h3>
-        <label for="entity-type">
-            I want to create a new:
-        </label>
-        <select id="entity-type" name="entity-type" [(ngModel)]="newEntryData.type">
-            <option value="actor">Person</option>
-            <option value="event">Event</option>
-            <option value="item">Artifact</option>
-            <option value="institution">Institution</option>
-        </select>
-        <div *ngIf="newEntryData.type">
-            <label>
-                Title: <input name="name" [(ngModel)]="newEntryData.name">
-            </label>
-            <label>
-                {{ getLablesForStartDate() }}: <input name="start" type="datetime-local"
-                    [(ngModel)]="newEntryData.start_date">
-            </label>
-            <input type="checkbox" name="startDateIsBC" [(ngModel)]="isStartDateBCE"> BCE(BC)
-            <div>
-                <input type="checkbox" name="impreciseStartDate" [(ngModel)]="isStartDateImprecise"> date is imprecise
-                <div *ngIf="isStartDateImprecise">
-                    <input type="checkbox" name="impreciseDay" [(ngModel)]="isStartDayImprecise"> don't know exact day
-                    <input type="checkbox" name="impreciseMonth" [(ngModel)]="isStartMonthImprecise"> don't know exact
-                    month
-                    <input type="checkbox" name="impreciseYear" [(ngModel)]="isStartYearImprecise"> don't know exact
-                    year
+</div> -->
+
+<div class="filter-panel">
+    <form #entryForm="ngForm">
+        <div ngModelGroup="newEntryData">
+            <!-- <h3>Add new entry</h3> -->
+            <button (click)="openAddNewEntryPanel = ! openAddNewEntryPanel">{{
+                openAddNewEntryPanel ? 'Hide' : 'Add new
+                entry'}}</button>
+            <ng-container *ngIf="openAddNewEntryPanel">
+                <label for="entity-type">
+                    I want to create a new:
+                </label>
+                <select id="entity-type" name="entity-type" [(ngModel)]="newEntryData.type">
+                    <option value="actor">Person</option>
+                    <option value="event">Event</option>
+                    <option value="item">Artifact</option>
+                    <option value="institution">Institution</option>
+                </select>
+
+                <div *ngIf="newEntryData.type">
+                    <div>
+                        <label>
+                            Title: <input name="name" [(ngModel)]="newEntryData.name">
+                        </label>
+                    </div>
+                    <div>
+
+                        <div class="filter-column">
+                            <label>
+                                {{ getLablesForStartDate() }}: <input name="start" type="datetime-local"
+                                    [(ngModel)]="newEntryData.start_date">
+                            </label>
+                            <input type="checkbox" name="startDateIsBC" [(ngModel)]="isStartDateBCE"> BCE(BC)
+
+                        </div>
+                        <input type="checkbox" name="impreciseStartDate" [(ngModel)]="isStartDateImprecise"> date is
+                        imprecise
+                        <div *ngIf="isStartDateImprecise">
+                            <input type="checkbox" name="impreciseDay" [(ngModel)]="isStartDayImprecise"> don't know
+                            exact
+                            day
+                            <input type="checkbox" name="impreciseMonth" [(ngModel)]="isStartMonthImprecise"> don't know
+                            exact
+                            month
+                            <input type="checkbox" name="impreciseYear" [(ngModel)]="isStartYearImprecise"> don't know
+                            exact
+                            year
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+
+                <div *ngIf="entryExists">
+                    ENTRY EXISTS
+                    {{ existingEntry | json }}
+                </div>
+
+                <button [disabled]="!newEntryData.name" (click)="createEntry()">Create entry</button>
+            </ng-container>
         </div>
+    </form>
+</div>
 
-
-        <div *ngIf="entryExists">
-            ENTRY EXISTS
-            {{ existingEntry | json }}
-        </div>
-
-        <button [disabled]="!newEntryData.name" (click)="createEntry()">Create entry</button>
-    </div>
-</form>
+<div>
+    <button (click)="openModal()">Add new line</button>
+</div>
