@@ -3,6 +3,7 @@ const axios = require('axios');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
+
 const app = express();
 
 const pool = new Pool({
@@ -174,16 +175,16 @@ async function createActorEntry(pool, name, start_date) {
 // Function to create an item entry
 async function createItemEntry(pool, name) {
   try {
-  //create entity entry for the item
-  const entityId = await createEntity(pool, name);
+    //create entity entry for the item
+    const entityId = await createEntity(pool, name);
 
-  //create item entry
-  const itemsQuery = `
-    INSERT INTO items (entity_id)
-    VALUES ($1)
-  `;
+    //create item entry
+    const itemsQuery = `
+      INSERT INTO items (entity_id)
+      VALUES ($1)
+    `;
 
-  await pool.query(itemsQuery, [entityId])
+    await pool.query(itemsQuery, [entityId])
   } catch (error) {
     console.error('Error creating item entry:', error);
 
@@ -225,13 +226,16 @@ async function createInstitutionEntry(pool, name) {
 }
 
 
+// if (lonestanding && start_date === end_date) (
+//   do not create birth & daeth events
+// )
+
 
 
 app.get('/find-entry', async (req, res) => {
   const { name, start_date, end_date } = req.query;
   let conditions = [];
   let params = [];
-
 
   if (name) {
     conditions.push('name = $1');
@@ -265,6 +269,7 @@ app.get('/find-entry', async (req, res) => {
 
 app.get('/check-if-exists', async (req, res) => {
   const { name, start_date, end_date } = req.query;
+  console.log(req.query, 'req.query')
   const query = 'SELECT EXISTS (SELECT 1 FROM entities WHERE name = $1) AS "exists";';
   try {
     const { rows } = await pool.query(query, [name]);
