@@ -51,8 +51,14 @@ export class AppComponent implements OnInit {
     
       // Declare the x (horizontal position) scale.
       const x = d3.scaleUtc()
-          .domain([new Date(line.events[0].year), new Date(line.events[line.events.length - 1].year)])
-          .range([marginLeft, width - marginRight]);
+      .domain([new Date(line.events[0].start_date), new Date(line.events[line.events.length - 1].end_date)])
+      .range([marginLeft, width - marginRight])
+      .nice();
+
+
+    console.log(new Date(line.events[2].end_date))
+    const xAxis = d3.axisBottom(x);
+    xAxis.ticks(line.events.length);
     
       // Create the SVG container.
       const svg = d3.select("#timeline-container")
@@ -63,7 +69,7 @@ export class AppComponent implements OnInit {
       // Add the x-axis.
       svg.append("g")
           .attr("transform", `translate(0,${height - marginBottom})`)
-          .call(d3.axisBottom(x));
+      .call(xAxis);
 
       // Return the SVG element.
       return svg.node();
