@@ -312,7 +312,6 @@ export class TimelineComponent {
   // ];
 
 
-  // lines = [1, 6, 7, 8]
   // entities: any;
 
 
