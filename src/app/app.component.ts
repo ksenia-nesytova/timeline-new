@@ -74,26 +74,62 @@ export class AppComponent implements OnInit {
 
     const sortedDatesArr = findStartDateandEndDate();
 
+    // Declare the x scale
+    const x = d3.scaleTime()
+      .domain(d3.extent(sortedDatesArr) as [Date, Date])
+      .range([0, width])
       .nice();
-
-
-    console.log(new Date(line.events[2].end_date))
-    const xAxis = d3.axisBottom(x);
-    xAxis.ticks(line.events.length);
 
     // Create the SVG container.
     const svg = d3.select("#timeline-container")
       .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    // Add the x-axis.
+
+    // Add x axis
+    const xAxis = d3.axisBottom(x)
+      .ticks(d3.timeYear.every(2))
+    // .tickFormat(d3.timeFormat("%Y"));
+
+
+    // Add the x axis group
     svg.append("g")
-      .attr("transform", `translate(0,${height - marginBottom})`)
+      .attr("class", "x-axis-group")
       .call(xAxis);
 
+
+    const eventsG = svg.selectAll(".event") //"event" class is auto assigned
+      .data(line.events)
+      .enter()
+      .append("g")
+      .attr("class", "event");
+
+    eventsG.append("text")
+      .attr("x", (event) => x(event.start_date)) //determine coords of the label based on date
+      .attr("y", -45)
+      .text((d) => d.name);
+
+    //add vertical line between event and date
+    // eventsG.append("line")
+    //   .attr("x1", (event) => x(event.start_date))
+    //   .attr("y1", -15)
+    //   .attr("x2", (event) => x(event.start_date))
+    //   .attr("y2", height);
+
+    // add box for an interval
+    eventsG.append("rect")
+      .attr("x", (event) => x(event.start_date))
+      .attr("y", -10)
+      .attr("width", (event) => Math.abs(x(event.end_date) -
+        x(event.start_date)))
+      .attr("height", 10)
+      .attr("class", "interval-rect");
+
     // Return the SVG element.
-    return svg.node();
+    // return svg.node();
   }
 
 
