@@ -62,10 +62,18 @@ export class AppComponent implements OnInit {
       ],
     };
 
-    // Declare the x (horizontal position) scale.
-    const x = d3.scaleUtc()
-      .domain([new Date(line.events[0].start_date), new Date(line.events[line.events.length - 1].end_date)])
-      .range([marginLeft, width - marginRight])
+    const findStartDateandEndDate = function (): Array<Date> {
+      const startDateArray = line.events.map((event) => event.start_date);
+      const endDateArray = line.events.map((event) => event.end_date);
+      let datesArray = startDateArray.concat(endDateArray).sort().map(date => new Date(date));
+      return datesArray;
+    }
+
+
+    //https://observablehq.com/@d3/d3-extent
+
+    const sortedDatesArr = findStartDateandEndDate();
+
       .nice();
 
 
