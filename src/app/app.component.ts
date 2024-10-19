@@ -22,12 +22,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Declare the chart dimensions and margins.
-    const width = 640;
-    const height = 400;
-    // const marginTop = 20;
-    const marginRight = 20;
-    const marginBottom = 30;
-    const marginLeft = 70;
+    const margin = { top: 220, right: 20, bottom: 30, left: 50 };
+    const width = 600 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
+
 
     //https://d3js.org/d3-axis
 
