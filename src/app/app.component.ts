@@ -75,6 +75,21 @@ export class AppComponent implements OnInit {
 
     const sortedDatesArr = findStartDateandEndDate();
 
+
+
+    const startYear = Math.abs(sortedDatesArr[sortedDatesArr.length - 1].getFullYear());
+    const endYear = Math.abs(sortedDatesArr[0].getFullYear());
+
+    const startDecade = Math.floor(startYear / 10) * 10;
+    const endDecade = Math.ceil(endYear / 10) * 10;
+
+    const interval = startDecade - endDecade;
+    // const ticks: number[] = [];
+
+
+    console.log(interval)
+
+
     // Declare the x scale
     const x = d3.scaleTime()
       .domain(d3.extent(sortedDatesArr) as [Date, Date])
