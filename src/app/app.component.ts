@@ -63,12 +63,13 @@ export class AppComponent implements OnInit {
     };
 
     const findStartDateandEndDate = function (): Array<Date> {
-      const startDateArray = line.events.map((event) => event.start_date);
-      const endDateArray = line.events.map((event) => event.end_date);
-      let datesArray = startDateArray.concat(endDateArray).sort().map(date => new Date(date));
+      const startDateArray = line.events.map((event) => event.start_date * 1000);
+      const endDateArray = line.events.map((event) => event.end_date * 1000);
+
+      const datesArray = startDateArray.concat(endDateArray).sort().map(date => new Date(date));
+
       return datesArray;
     }
-
 
     //https://observablehq.com/@d3/d3-extent
 
